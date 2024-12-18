@@ -7,7 +7,7 @@ PKG_CONFIG = pkg-config
 OPENCV_FLAGS = $(shell pkg-config --cflags --libs opencv4)
 
 # Source files and executable
-SRC = main.cpp  # Add other .cpp files here if you have them
+SRC = src/main.cpp  # Add other .cpp files here if you have them
 OBJ = $(SRC:.cpp=.o)
 EXEC = main
 

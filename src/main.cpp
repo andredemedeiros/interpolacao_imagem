@@ -26,7 +26,7 @@ cv::Vec3b bilinearInterpolate(const cv::Mat& image, float x, float y) {
 
 int main() {
     std::string imagePath = "../imgs/Fig0220(a)(chronometer 3692x2812 2pt25 inch 1250 dpi).tif";
-
+  
     cv::Mat image = cv::imread(imagePath, cv::IMREAD_COLOR);
 
     if (image.empty()) {
@@ -36,9 +36,7 @@ int main() {
 
     int currentDpi = 1250;
 
-    int desiredDpi;
-    std::cout << "DPI desejado:";
-    std::cin >> desiredDpi;
+    int desiredDpi = 300;
 
     float scalingFactor = (float)desiredDpi / currentDpi;
 
@@ -46,7 +44,6 @@ int main() {
     int newHeight = (int)(image.rows * scalingFactor);
 
     cv::Mat resizedImage(newHeight, newWidth, image.type());
-
     for (int y = 0; y < newHeight; ++y) {
         for (int x = 0; x < newWidth; ++x) {
             float srcX = x / scalingFactor;
@@ -55,12 +52,12 @@ int main() {
             resizedImage.at<cv::Vec3b>(y, x) = bilinearInterpolate(image, srcX, srcY);
         }
     }
-
+    
     cv::namedWindow("DPI original", cv::WINDOW_NORMAL);
-    cv::imshow("DPI original", image);
+    //cv::imshow("DPI original", image);
 
     cv::namedWindow("DPI reduzido", cv::WINDOW_NORMAL);
-    cv::imshow("DPI reduzido", resizedImage);
+    //cv::imshow("DPI reduzido", resizedImage);
 
     std::cout << "Pressione qualquer tecla" << std::endl;
     cv::waitKey(0);
@@ -82,7 +79,7 @@ int main() {
     }
 
     cv::namedWindow("DPI interpolado", cv::WINDOW_NORMAL);
-    cv::imshow("DPI interpolado", enlargedImage);
+    //cv::imshow("DPI interpolado", enlargedImage);
 
     cv::waitKey(0);
 
